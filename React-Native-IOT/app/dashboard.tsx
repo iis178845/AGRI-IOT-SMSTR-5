@@ -59,6 +59,7 @@ export default function DashboardRiwayatScreen() {
   // State input Mode Otomatis
   const [targetPH, setTargetPH] = useState("");
   const [targetTDS, setTargetTDS] = useState("");
+  const [riwayat, setRiwayat] = useState([]);
 
   const onDisableAutomatic = () => {
     setTargetPH("");
@@ -78,12 +79,27 @@ export default function DashboardRiwayatScreen() {
       // error reading value
     }
   };
+  const getDataRiwayat = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/riwayat/get", {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     getData().then((res) => setUserData(res));
+    getDataRiwayat().then((res) => setRiwayat(res.data));
   }, []);
-  console.log(userData);
+  console.log(riwayat);
 
   const renderDashboard = () => (
     <ScrollView
@@ -295,12 +311,44 @@ export default function DashboardRiwayatScreen() {
             Tersambung (Wi-Fi)
           </Text>
         </View>
-        <ScrollView style={styles.logContent}>
+        {/*<ScrollView style={styles.logContent}>
           {logData.map((item, index) => (
             <Text key={index} style={styles.logText}>
               {item}
             </Text>
           ))}
+        </ScrollView>*/}
+        <ScrollView style={styles.logContent}>
+          {riwayat.map((item, index) => {
+            const now = new Date(item.created_at);
+            const format = new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            });
+            const mode =
+              item.mode_ph === "otomatis"
+                ? "Mode Otomatis DIKUNCI"
+                : "Mode Otomatis DINONAKTIFKAN";
+            const ph = item.ph;
+            const ppm = item.ppm;
+            const suhu_air = item.suhu_air;
+            const Kelembapan = item.kelembapan;
+            const suhu_udara = item.suhu_udara;
+
+            return (
+              <Text key={index} style={styles.logText}>
+                {format.format(now)} {mode} {"PH: " + ph},&nbsp;
+                {"TDS: " + ppm + " ppm "},&nbsp;{"SUHU AIR:" + suhu_air + " C"}
+                ,&nbsp;
+                {"KELEMBAPAN:" + Kelembapan + " C"},&nbsp;
+                {"SUHU UDARA:" + suhu_udara + " C"}
+              </Text>
+            );
+          })}
         </ScrollView>
       </View>
 
