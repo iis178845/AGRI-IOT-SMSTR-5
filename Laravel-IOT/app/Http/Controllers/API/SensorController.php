@@ -3,23 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Riwayat;
 use App\Models\Sensor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RiwayatController extends Controller
+class SensorController extends Controller
 {
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'ph' => 'required',
-            'ppm' => 'required',
+            'tds' => 'required',
             'suhu_air' => 'required',
             'kelembapan' => 'required',
             'suhu_udara' => 'required',
-            'mode_ph' => 'required',
-            'mode_nutrisi' => 'required',
         ]);
 
         //check if validation fails
@@ -34,21 +31,19 @@ class RiwayatController extends Controller
 
         try {
             //create product
-            $riwayat = Riwayat::create([
+            $sensor = Sensor::create([
                 'ph' => $request->ph,
-                'ppm' => $request->ppm,
+                'tds' => $request->tds,
                 'suhu_air' => $request->suhu_air,
                 'kelembapan' => $request->kelembapan,
                 'suhu_udara' => $request->suhu_udara,
-                'mode_ph' => $request->mode_ph,
-                'mode_nutrisi' => $request->mode_nutrisi,
 
                 // 'price'         => $request->price,
                 // 'stock'         => $request->stock,
             ]);
             $response = [
                 'success' => true,
-                'massage' => 'Riwayat Berhasil disimpan',
+                'massage' => 'Data Sensor Berhasil disimpan',
             ];
 
             //return response
@@ -66,22 +61,10 @@ class RiwayatController extends Controller
     }
     public function getData()
     {
-        $riwayat = Riwayat::all();
+        $sensor = Sensor::orderBy('created_at','desc')->limit(1)->first();
         $response = [
             'success' => true,
-            'massage' => 'Daftar Riwayat',
-            'data' => $riwayat,
-        ];
-
-        //return response
-        return response()->json($response, 200);
-    }
-        public function getDataSensor()
-    {
-        $sensor = Sensor::all();
-        $response = [
-            'success' => true,
-            'massage' => 'Daftar Riwayat Sensor',
+            'massage' => 'Daftar Sensor',
             'data' => $sensor,
         ];
 

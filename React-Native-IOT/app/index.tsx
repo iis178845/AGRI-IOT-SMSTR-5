@@ -1,8 +1,8 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link, useRouter } from "expo-router";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from "react";
 import {
   Alert,
@@ -33,7 +33,7 @@ export default function App() {
       const data = await response.json();
       console.log(data);
       const user = JSON.stringify(data.user);
-await AsyncStorage.setItem('user', user);
+      await AsyncStorage.setItem("user", user);
       if (!response.ok) {
         Alert.alert(
           "Login Gagal",

@@ -93,11 +93,48 @@ export default function DashboardRiwayatScreen() {
       return error;
     }
   };
+
+  const getDataSensor = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/sensor/get", {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+  const getDataSensorRiwayat = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/riwayat/get-sensor",
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   const [userData, setUserData] = useState(null);
+  const [sensorData, setSensorData] = useState(null);
+  const [riwayatSensorData, setRiwayatSensorData] = useState([]);
 
   useEffect(() => {
     getData().then((res) => setUserData(res));
     getDataRiwayat().then((res) => setRiwayat(res.data));
+    getDataSensor().then((res) => setSensorData(res.data));
+    getDataSensorRiwayat().then((res) => setRiwayatSensorData(res.data));
   }, []);
   console.log(riwayat);
 
@@ -128,7 +165,7 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.infoLabelText}>Nilai Ph</Text>
           </View>
           <View style={styles.infoValueBox}>
-            <Text style={styles.infoValue}>7</Text>
+            <Text style={styles.infoValue}>{sensorData?.ph}</Text>
           </View>
         </View>
 
@@ -137,7 +174,7 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.infoLabelText}>Nilai TDS Sensor</Text>
           </View>
           <View style={styles.infoValueBox}>
-            <Text style={styles.infoValue}>870 ppm</Text>
+            <Text style={styles.infoValue}>{sensorData?.tds} ppm</Text>
             <Text style={styles.icon}>💧</Text>
           </View>
         </View>
@@ -147,7 +184,7 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.infoLabelText}>Suhu Air</Text>
           </View>
           <View style={styles.infoValueBox}>
-            <Text style={styles.infoValue}>30&#176;C</Text>
+            <Text style={styles.infoValue}>{sensorData?.suhu_air}&#176;C</Text>
             <Text style={styles.icon}>🌡️</Text>
           </View>
         </View>
@@ -164,7 +201,9 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.infoLabelText}>Suhu Udara</Text>
           </View>
           <View style={styles.infoValueBox}>
-            <Text style={styles.infoValue}>29.3&#176;C</Text>
+            <Text style={styles.infoValue}>
+              {sensorData?.suhu_udara}&#176;C
+            </Text>
             <Text style={styles.icon}>🌡️</Text>
           </View>
         </View>
@@ -174,7 +213,7 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.infoLabelText}>Kelembapan Udara</Text>
           </View>
           <View style={styles.infoValueBox}>
-            <Text style={styles.infoValue}>76 %</Text>
+            <Text style={styles.infoValue}>{sensorData?.kelembapan} %</Text>
             <Text style={styles.icon}>☁️</Text>
           </View>
         </View>
@@ -319,7 +358,7 @@ export default function DashboardRiwayatScreen() {
           ))}
         </ScrollView>*/}
         <ScrollView style={styles.logContent}>
-          {riwayat.map((item, index) => {
+          {riwayatSensorData.map((item, index) => {
             const now = new Date(item.created_at);
             const format = new Intl.DateTimeFormat("en-US", {
               year: "numeric",
@@ -329,20 +368,16 @@ export default function DashboardRiwayatScreen() {
               minute: "2-digit",
               second: "2-digit",
             });
-            const mode =
-              item.mode_ph === "otomatis"
-                ? "Mode Otomatis DIKUNCI"
-                : "Mode Otomatis DINONAKTIFKAN";
             const ph = item.ph;
-            const ppm = item.ppm;
+            const tds = item.tds;
             const suhu_air = item.suhu_air;
             const Kelembapan = item.kelembapan;
             const suhu_udara = item.suhu_udara;
 
             return (
               <Text key={index} style={styles.logText}>
-                {format.format(now)} {mode} {"PH: " + ph},&nbsp;
-                {"TDS: " + ppm + " ppm "},&nbsp;{"SUHU AIR:" + suhu_air + " C"}
+                {format.format(now)} {"PH: " + ph},&nbsp;
+                {"TDS: " + tds + " tds "},&nbsp;{"SUHU AIR:" + suhu_air + " C"}
                 ,&nbsp;
                 {"KELEMBAPAN:" + Kelembapan + " C"},&nbsp;
                 {"SUHU UDARA:" + suhu_udara + " C"}
