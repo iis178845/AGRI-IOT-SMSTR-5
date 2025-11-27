@@ -146,9 +146,10 @@ export default function DashboardRiwayatScreen() {
       {/* Logo */}
       <View style={styles.logoContainer}>
         <View style={styles.logoPlaceholder}>
-          <Text style={{ fontWeight: "bold", fontSize: 12, color: "#444" }}>
-            Logo
-          </Text>
+          Logo
+          <Text
+            style={{ fontWeight: "bold", fontSize: 12, color: "#444" }}
+          ></Text>
         </View>
         <Text style={styles.mainTitle}>Smart Greenhouse Dashboard</Text>
       </View>
