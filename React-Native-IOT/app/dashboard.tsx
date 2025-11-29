@@ -422,29 +422,93 @@ export default function DashboardRiwayatScreen() {
           </View>
         </View>
       </View>
+    </ScrollView>
+  );
 
-      {/* Informasi Akun */}
-      <View style={[styles.accountBox, { borderColor: "#00b2fe" }]}>
-        <Text style={styles.accountTitle}>Informasi Akun</Text>
-        <View style={styles.accountInfoRow}>
-          <Text style={styles.accountLabel}>Nama Akun</Text>
-          <Text style={styles.accountValue}>: {userData?.nama}</Text>
-        </View>
-        <View style={styles.accountInfoRow}>
-          <Text style={styles.accountLabel}>Peran</Text>
-          <Text style={styles.accountValue}>: Pengguna</Text>
+<<<<<<< HEAD
+  const renderProfile = () => (
+=======
+
+    const renderProfile = () => (
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
+    <ScrollView
+      style={styles.contentScroll}
+      contentContainerStyle={{ padding: 20 }}
+    >
+      <View style={styles.profileContainer}>
+        {/* Foto Profile */}
+        <View style={styles.profileImageBox}>
+          <Text style={{ fontSize: 40 }}>👤</Text>
+<<<<<<< HEAD
         </View>
 
+        <Text style={styles.profileName}>{userData?.nama}</Text>
+        <Text style={styles.profileRole}>Pengguna</Text>
+
+        <View style={styles.profileInfoBox}>
+          <Text style={styles.profileInfoTitle}>Informasi Akun</Text>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Nama</Text>
+            <Text style={styles.profileValue}>{userData?.nama}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Email</Text>
+            <Text style={styles.profileValue}>{userData?.email}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Peran</Text>
+            <Text style={styles.profileValue}>Pengguna</Text>
+          </View>
+=======
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
+        </View>
+
+        <Text style={styles.profileName}>{userData?.nama}</Text>
+        <Text style={styles.profileRole}>Pengguna</Text>
+
+        <View style={styles.profileInfoBox}>
+          <Text style={styles.profileInfoTitle}>Informasi Akun</Text>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Nama</Text>
+            <Text style={styles.profileValue}>{userData?.nama}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Email</Text>
+            <Text style={styles.profileValue}>{userData?.email}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Peran</Text>
+            <Text style={styles.profileValue}>Pengguna</Text>
+          </View>
+        </View>
+
+
+       
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-          <Text style={styles.logoutButtonText}>Keluar</Text>
+          <Text style={styles.logoutButtonText}>Keluar Akun</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 
+
   return (
     <View style={{ flex: 1 }}>
-      {activeTab === "dashboard" ? renderDashboard() : renderRiwayat()}
+      {activeTab === "dashboard"
+        ? renderDashboard()
+        : activeTab === "riwayat"
+        ? renderRiwayat()
+        : renderProfile()}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
 
       {/* Bottom Navigation */}
       <View style={styles.footer}>
@@ -494,6 +558,40 @@ export default function DashboardRiwayatScreen() {
             Riwayat
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+<<<<<<< HEAD
+          style={
+            activeTab === "profile" ? styles.navItemSelected : styles.navItem
+          }
+          onPress={() => setActiveTab("profile")}
+        >
+          <Text
+            style={
+              activeTab === "profile" ? styles.navIconSelected : styles.navIcon
+            }
+          >
+            👤
+          </Text>
+          <Text
+            style={
+              activeTab === "profile" ? styles.navTextSelected : styles.navText
+            }
+          >
+            Profile
+          </Text>
+        </TouchableOpacity>
+=======
+              style={activeTab === "profile" ? styles.navItemSelected : styles.navItem}
+              onPress={() => setActiveTab("profile")}
+            >
+              <Text style={activeTab === "profile" ? styles.navIconSelected : styles.navIcon}>
+                👤
+              </Text>
+              <Text style={activeTab === "profile" ? styles.navTextSelected : styles.navText}>
+                Profile
+              </Text>
+            </TouchableOpacity>
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
       </View>
     </View>
   );
@@ -795,4 +893,76 @@ const styles = StyleSheet.create({
   contentScroll: {
     flex: 1,
   },
+<<<<<<< HEAD
+  profileContainer: {
+=======
+    profileContainer: {
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
+    alignItems: "center",
+    marginTop: 20,
+  },
+  profileImageBox: {
+    width: 120,
+    height: 120,
+    backgroundColor: "#333",
+    borderRadius: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  profileName: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  profileRole: {
+    fontSize: 14,
+    color: "#aaa",
+    marginBottom: 20,
+  },
+  profileInfoBox: {
+    width: "100%",
+    backgroundColor: "#222",
+    borderRadius: 15,
+    padding: 15,
+    borderWidth: 2,
+    borderColor: "#00b2fe",
+    marginBottom: 20,
+  },
+  profileInfoTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#00b2fe",
+    marginBottom: 12,
+  },
+  profileInfoRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  profileLabel: {
+    color: "#ddd",
+  },
+  profileValue: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  editButton: {
+    width: "80%",
+    backgroundColor: "#00b2fe",
+    paddingVertical: 12,
+    borderRadius: 10,
+    marginBottom: 12,
+  },
+  editButtonText: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 588ae75db124f2314e1380ef229ce0e88efab5e2
 });
