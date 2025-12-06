@@ -456,12 +456,7 @@ export default function DashboardRiwayatScreen() {
     </ScrollView>
   );
 
-<<<<<<< HEAD
-
-    const renderProfile = () => (
-=======
   const renderProfile = () => (
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
     <ScrollView
       style={styles.contentScroll}
       contentContainerStyle={{ padding: 20 }}
@@ -470,8 +465,6 @@ export default function DashboardRiwayatScreen() {
         {/* Foto Profile */}
         <View style={styles.profileImageBox}>
           <Text style={{ fontSize: 40 }}>👤</Text>
-<<<<<<< HEAD
-=======
         </View>
 
         <Text style={styles.profileName}>{userData?.nama}</Text>
@@ -494,7 +487,6 @@ export default function DashboardRiwayatScreen() {
             <Text style={styles.profileLabel}>Peran</Text>
             <Text style={styles.profileValue}>Pengguna</Text>
           </View>
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
         </View>
 
         <Text style={styles.profileName}>{userData?.nama}</Text>
@@ -536,10 +528,6 @@ export default function DashboardRiwayatScreen() {
         : activeTab === "riwayat"
         ? renderRiwayat()
         : renderProfile()}
-<<<<<<< HEAD
-
-=======
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
 
       {/* Bottom Navigation */}
       <View style={styles.footer}>
@@ -590,18 +578,6 @@ export default function DashboardRiwayatScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-<<<<<<< HEAD
-              style={activeTab === "profile" ? styles.navItemSelected : styles.navItem}
-              onPress={() => setActiveTab("profile")}
-            >
-              <Text style={activeTab === "profile" ? styles.navIconSelected : styles.navIcon}>
-                👤
-              </Text>
-              <Text style={activeTab === "profile" ? styles.navTextSelected : styles.navText}>
-                Profile
-              </Text>
-            </TouchableOpacity>
-=======
           style={
             activeTab === "profile" ? styles.navItemSelected : styles.navItem
           }
@@ -622,7 +598,6 @@ export default function DashboardRiwayatScreen() {
             Profile
           </Text>
         </TouchableOpacity>
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
       </View>
     </View>
   );
@@ -924,11 +899,7 @@ const styles = StyleSheet.create({
   contentScroll: {
     flex: 1,
   },
-<<<<<<< HEAD
-    profileContainer: {
-=======
   profileContainer: {
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
     alignItems: "center",
     marginTop: 20,
   },
@@ -990,10 +961,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
 });
