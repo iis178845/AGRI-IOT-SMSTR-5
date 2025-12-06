@@ -400,7 +400,7 @@ export default function DashboardRiwayatScreen() {
               minute: "2-digit",
               second: "2-digit",
             });
-            const ph = item.ph;
+            const ph = item.ph
             const tds = item.tds;
             const suhu_air = item.suhu_air;
             const Kelembapan = item.kelembapan;
