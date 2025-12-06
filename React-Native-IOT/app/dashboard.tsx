@@ -94,6 +94,24 @@ export default function DashboardRiwayatScreen() {
     }
   };
 
+  const getDataKontrol = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:8000/api/kontrol/get-status",
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   const getDataSensor = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/sensor/get", {
@@ -135,6 +153,19 @@ export default function DashboardRiwayatScreen() {
     getDataRiwayat().then((res) => setRiwayat(res.data));
     getDataSensor().then((res) => setSensorData(res.data));
     getDataSensorRiwayat().then((res) => setRiwayatSensorData(res.data));
+    getDataKontrol().then((res) => {
+      setKecepatanKipas(res.data.kecepatan_kipas);
+      setSuhuUdara(res.data.suhu_udara === "otomatis" ? true : false);
+
+      setKipasVentilasi(res.data.kipas_ventilasi === "otomatis" ? true : false);
+      setLampuGrowLight(
+        res.data.lampu_growth_ligth === "otomatis" ? true : false
+      );
+      setPhNaik(res.data.ph_naik === "otomatis" ? true : false);
+      setPhTurun(res.data.ph_turun === "otomatis" ? true : false);
+      setNutrisiA(res.data.nutrisi_a === "otomatis" ? true : false);
+      setNutrisiB(res.data.nutrisi_b === "otomatis" ? true : false);
+    });
   }, []);
   console.log(riwayat);
 
@@ -425,8 +456,12 @@ export default function DashboardRiwayatScreen() {
     </ScrollView>
   );
 
+<<<<<<< HEAD
 
     const renderProfile = () => (
+=======
+  const renderProfile = () => (
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
     <ScrollView
       style={styles.contentScroll}
       contentContainerStyle={{ padding: 20 }}
@@ -435,6 +470,31 @@ export default function DashboardRiwayatScreen() {
         {/* Foto Profile */}
         <View style={styles.profileImageBox}>
           <Text style={{ fontSize: 40 }}>👤</Text>
+<<<<<<< HEAD
+=======
+        </View>
+
+        <Text style={styles.profileName}>{userData?.nama}</Text>
+        <Text style={styles.profileRole}>Pengguna</Text>
+
+        <View style={styles.profileInfoBox}>
+          <Text style={styles.profileInfoTitle}>Informasi Akun</Text>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Nama</Text>
+            <Text style={styles.profileValue}>{userData?.nama}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Email</Text>
+            <Text style={styles.profileValue}>{userData?.email}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Peran</Text>
+            <Text style={styles.profileValue}>Pengguna</Text>
+          </View>
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
         </View>
 
         <Text style={styles.profileName}>{userData?.nama}</Text>
@@ -476,7 +536,10 @@ export default function DashboardRiwayatScreen() {
         : activeTab === "riwayat"
         ? renderRiwayat()
         : renderProfile()}
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
 
       {/* Bottom Navigation */}
       <View style={styles.footer}>
@@ -527,6 +590,7 @@ export default function DashboardRiwayatScreen() {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+<<<<<<< HEAD
               style={activeTab === "profile" ? styles.navItemSelected : styles.navItem}
               onPress={() => setActiveTab("profile")}
             >
@@ -537,6 +601,28 @@ export default function DashboardRiwayatScreen() {
                 Profile
               </Text>
             </TouchableOpacity>
+=======
+          style={
+            activeTab === "profile" ? styles.navItemSelected : styles.navItem
+          }
+          onPress={() => setActiveTab("profile")}
+        >
+          <Text
+            style={
+              activeTab === "profile" ? styles.navIconSelected : styles.navIcon
+            }
+          >
+            👤
+          </Text>
+          <Text
+            style={
+              activeTab === "profile" ? styles.navTextSelected : styles.navText
+            }
+          >
+            Profile
+          </Text>
+        </TouchableOpacity>
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
       </View>
     </View>
   );
@@ -838,7 +924,11 @@ const styles = StyleSheet.create({
   contentScroll: {
     flex: 1,
   },
+<<<<<<< HEAD
     profileContainer: {
+=======
+  profileContainer: {
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
     alignItems: "center",
     marginTop: 20,
   },
@@ -900,7 +990,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> e2f8318d167dcb6bf0fd6a00a2a6879ae1bbad51
 });

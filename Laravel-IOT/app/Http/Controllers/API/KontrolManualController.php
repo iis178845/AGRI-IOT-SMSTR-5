@@ -5,14 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\KontrolManual;
 use Illuminate\Http\Request;
-
-class KontrolManualController extends Controller
-{
-namespace App\Http\Controllers\API;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\KontrolManual;
+use Illuminate\Support\Facades\Validator;
 
 class KontrolManualController extends Controller
 {
@@ -30,12 +23,18 @@ class KontrolManualController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'suhu_udara'       => 'boolean',
-            'kipas_ventilasi'  => 'boolean',
-            'lampu_grow_light' => 'boolean',
-            'kecepatan_kipas'  => 'integer|min:0|max:100',
+            'suhu_udara'       => 'required',
+            'kipas_ventilasi'  => 'required',
+            'lampu_growth_light' => 'required',
+            'kecepatan_kipas'  => 'required|integer|min:0|max:100',
+            'ph_naik'=>'required',
+            'ph_turun'=>'required',
+            'nutrisi_a'=>'required',
+            'nutrisi_b'=>'required'
+
         ]);
 
+        dd(1);
         $control = KontrolManual::first();
         $control->update($request->all());
 
@@ -51,6 +50,62 @@ class KontrolManualController extends Controller
     {
         return KontrolManual::first();
     }
-}
+        public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'suhu_udara'       => 'required',
+            'kipas_ventilasi'  => 'required',
+            'lampu_growth_light' => 'required',
+            'kecepatan_kipas'  => 'required|integer|min:0|max:100',
+            'ph_naik'=>'required',
+            'ph_turun'=>'required',
+            'nutrisi_a'=>'required',
+            'nutrisi_b'=>'required'
+        ]);
+
+        //check if validation fails
+        if ($validator->fails()) {
+            $response = [
+                'success' => false,
+                'massage' => $validator->errors(),
+            ];
+
+            return response()->json($response, 422);
+        }
+
+        try {
+            //create product
+            $riwayat = KontrolManual::create([
+                'ph' => $request->ph,
+                'ppm' => $request->ppm,
+                'suhu_air' => $request->suhu_air,
+                'kelembapan' => $request->kelembapan,
+                'suhu_udara' => $request->suhu_udara,
+                'mode_ph' => $request->mode_ph,
+                'mode_nutrisi' => $request->mode_nutrisi,
+
+                // 'price'         => $request->price,
+                // 'stock'         => $request->stock,
+            ]);
+            $response = [
+                'success' => true,
+                'massage' => 'Riwayat Berhasil disimpan',
+            ];
+
+            //return response
+            return response()->json($response, 200);
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'massage' => $e->getMessage(),
+            ];
+
+            //return response
+            return response()->json($response, 200);
+        }
+        //define validation rules
+    }
 
 }
+
+

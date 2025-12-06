@@ -9,8 +9,13 @@ class KontrolManual extends Model
     protected $fillable = [
         'suhu_udara',
         'kipas_ventilasi',
-        'lampu_grow_light',
+        'lampu_growth_light',
         'kecepatan_kipas',
+        'ph_naik',
+        'ph_turun',
+        'nutrisi_a',
+        'nutrisi_b'
     ];
+    protected $table='kontrol_manual';
 }
 

@@ -4,9 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\KontrolController;
+use App\Http\Controllers\API\KontrolManualController;
 use App\Http\Controllers\API\RiwayatController;
 use App\Http\Controllers\API\SensorController;
-use App\Http\Controllers\API\KontrolManualController;
 
 
 Route::post('/user', [UserController::class, 'register']);
@@ -23,8 +24,6 @@ Route::prefix('sensor')->group(function () {
     Route::get('get', [SensorController::class,'getData']);
 });
 
-Route::get('/kontrol', [KontrolManualController::class, 'getStatus']);
-Route::post('/kontrol/update', [KontrolManualController::class, 'update']);
+Route::post('/kontrol/update', [KontrolController::class, 'update']);
+Route::get('/kontrol/get-status', [KontrolController::class, 'getStatus']);
 
-// Untuk IoT device (GET data saja)
-Route::get('/kontrol/device', [KontrolManualController::class, 'deviceSync']);
