@@ -1,6 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ScrollView,
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 export default function Profile() {
+  const router = useRouter(); // <= diperbaiki
   const [name, setName] = useState("");
   const [userID, setUserID] = useState("");
 
@@ -31,7 +32,7 @@ export default function Profile() {
 
   const logout = async () => {
     await AsyncStorage.clear();
-    router.replace("/");
+    router.replace("/"); // <= sekarang aman digunakan
   };
 
   return (
