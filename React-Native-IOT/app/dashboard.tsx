@@ -400,7 +400,7 @@ export default function DashboardRiwayatScreen() {
               minute: "2-digit",
               second: "2-digit",
             });
-            const ph = item.ph
+            const ph = item.ph;
             const tds = item.tds;
             const suhu_air = item.suhu_air;
             const Kelembapan = item.kelembapan;
@@ -467,6 +467,28 @@ export default function DashboardRiwayatScreen() {
           <Text style={{ fontSize: 40 }}>👤</Text>
         </View>
 
+        {/* <Text style={styles.profileName}>{userData?.nama}</Text>
+        <Text style={styles.profileRole}>Pengguna</Text>
+
+        <View style={styles.profileInfoBox}>
+          <Text style={styles.profileInfoTitle}>Informasi Akun</Text>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Nama</Text>
+            <Text style={styles.profileValue}>{userData?.nama}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Email</Text>
+            <Text style={styles.profileValue}>{userData?.email}</Text>
+          </View>
+
+          <View style={styles.profileInfoRow}>
+            <Text style={styles.profileLabel}>Peran</Text>
+            <Text style={styles.profileValue}>Pengguna</Text>
+          </View>
+        </View> */}
+
         <Text style={styles.profileName}>{userData?.nama}</Text>
         <Text style={styles.profileRole}>Pengguna</Text>
 
@@ -489,37 +511,12 @@ export default function DashboardRiwayatScreen() {
           </View>
         </View>
 
-        <Text style={styles.profileName}>{userData?.nama}</Text>
-        <Text style={styles.profileRole}>Pengguna</Text>
-
-        <View style={styles.profileInfoBox}>
-          <Text style={styles.profileInfoTitle}>Informasi Akun</Text>
-
-          <View style={styles.profileInfoRow}>
-            <Text style={styles.profileLabel}>Nama</Text>
-            <Text style={styles.profileValue}>{userData?.nama}</Text>
-          </View>
-
-          <View style={styles.profileInfoRow}>
-            <Text style={styles.profileLabel}>Email</Text>
-            <Text style={styles.profileValue}>{userData?.email}</Text>
-          </View>
-
-          <View style={styles.profileInfoRow}>
-            <Text style={styles.profileLabel}>Peran</Text>
-            <Text style={styles.profileValue}>Pengguna</Text>
-          </View>
-        </View>
-
-
-       
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.logoutButtonText}>Keluar Akun</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
-
 
   return (
     <View style={{ flex: 1 }}>
